@@ -224,3 +224,25 @@ with col2:
 # Footer
 st.markdown('<div class="section-divider"></div>', unsafe_allow_html=True)
 st.markdown("Creado por Paula Jimena Chirinos Molina usando Streamlit.")
+st.markdown("""
+    <style>
+    /* Footer fijo al fondo */
+    .footer {
+        position: fixed;
+        left: 0;
+        bottom: 0;
+        width: 100%;
+        background-color: #a26dd8;  /* color lila */
+        color: white;
+        text-align: center;
+        padding: 10px 0;
+        font-size: 16px;
+        font-weight: bold;
+        box-shadow: 0 -2px 5px rgba(0,0,0,0.2);
+        z-index: 9999;
+    }
+    </style>
+    <div class="footer">
+        📧 a20230941@pucp.edu.pe | 📞 999003581
+    </div>
+""", unsafe_allow_html=True)
