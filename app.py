@@ -157,68 +157,47 @@ with col1:
     if "img_index" not in st.session_state:
         st.session_state.img_index = 0
 
-    # Estilo CSS para botones de flecha
+    # Estilo para botones de flecha personalizados usando Streamlit
 st.markdown("""
     <style>
-    .gallery-container {
-        position: relative;
-        text-align: center;
-    }
-
-    .gallery-img {
-        max-height: 400px;
-        width: auto;
-        border-radius: 10px;
-        box-shadow: 0 4px 8px rgba(0,0,0,0.1);
-    }
-
-    .arrow-button {
-        position: absolute;
-        top: 50%;
-        transform: translateY(-50%);
+    div.stButton > button {
         background-color: #a26dd8;
-        border: none;
         color: white;
-        font-size: 24px;
-        padding: 8px 12px;
+        border: none;
+        font-size: 20px;
+        padding: 10px 16px;
         border-radius: 50%;
-        cursor: pointer;
-        z-index: 10;
+        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
+        transition: background-color 0.3s ease;
     }
-
-    .arrow-left {
-        left: 10px;
-    }
-
-    .arrow-right {
-        right: 10px;
-    }
-
-    .arrow-button:hover {
+    div.stButton > button:hover {
         background-color: #7a45b2;
+        color: white;
     }
     </style>
 """, unsafe_allow_html=True)
 
-# Captura de botones personalizados con HTML y JS oculto
+# Botones y galería en columnas
+col_img1, col_img2, col_img3 = st.columns([1, 6, 1])
+
+with col_img1:
+    if st.button("⬅️", key="prev_img"):
+        st.session_state.img_index = (st.session_state.img_index - 1) % len(imagenes)
+
+with col_img3:
+    if st.button("➡️", key="next_img"):
+        st.session_state.img_index = (st.session_state.img_index + 1) % len(imagenes)
+
+# Imagen en el centro
 img_actual = imagenes[st.session_state.img_index]
-left_click = st.button("⬅", key="left_arrow", help="Imagen anterior")
-right_click = st.button("➡", key="right_arrow", help="Imagen siguiente")
-
-if left_click:
-    st.session_state.img_index = (st.session_state.img_index - 1) % len(imagenes)
-elif right_click:
-    st.session_state.img_index = (st.session_state.img_index + 1) % len(imagenes)
-
-# Render de imagen y flechas
-st.markdown(f"""
-    <div class="gallery-container">
-        <img src="{img_actual['url']}" class="gallery-img" />
-
-        <form method="post">
-            <button name="left_arrow" class="arrow-button arrow-left">⬅</button>
-            <button name="right_arrow" class="arrow-button arrow-right">➡</button>
-        </form>
+with col_img2:
+    st.markdown(f"""
+        <div style='text-align: center;'>
+            <img src="{img_actual['url']}" style="max-height:400px; width:auto; border-radius:10px; box-shadow: 0 4px 8px rgba(0,0,0,0.1);" />
+            <p style='color:#5f2c9c; margin-top:10px;'>{img_actual['caption']}</p>
+            <p style='color:gray; font-size:14px;'>Imagen {st.session_state.img_index + 1} de {len(imagenes)}</p>
+        </div>
+    """, unsafe_allow_html=True)
 
         <p style='color:#5f2c9c; margin-top:10px;'>{img_actual['caption']}</p>
         <p style='color:gray; font-size:14px;'>Imagen {st.session_state.img_index + 1} de {len(imagenes)}</p>
