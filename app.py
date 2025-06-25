@@ -77,6 +77,8 @@ st.markdown("""
 </div>
 """, unsafe_allow_html=True)
 
+st.markdown('<div class="section-divider"></div>', unsafe_allow_html=True)
+
 
 # Experiencia Laboral y Objetivo Profesional en columnas
 col1, col2 = st.columns(2)
