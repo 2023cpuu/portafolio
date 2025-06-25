@@ -159,7 +159,7 @@ with col1:
     if "img_index" not in st.session_state:
         st.session_state.img_index = 0
 
-    col_img1, col_img2, col_img3 = st.columns([1, 6, 1])
+    col_img1, col_img2, col_img3 = st.columns([0.5, 7, 0.5])
     with col_img1:
         if st.button("⬅️"):
             st.session_state.img_index = (st.session_state.img_index - 1) % len(imagenes)
