@@ -96,12 +96,17 @@ st.markdown("""
 st.markdown('<div class="section-divider"></div>', unsafe_allow_html=True)
 
 # Habilidades y Certificaciones
-st.markdown("## Habilidades")
-st.write("Canva, Excel, Python, Inglés, Artes visuales")
+# Habilidades y Certificaciones lado a lado
+col1, col2 = st.columns(2)
 
-st.markdown("## Certificaciones")
-st.write("- Cambridge B1 Preliminary")
-st.write("- Certificado del IB en Artes Visuales (2022)")
+with col1:
+    st.markdown("## 🛠️ Habilidades")
+    st.write("Canva, Excel, Python, Inglés, Artes visuales")
+
+with col2:
+    st.markdown("## 🎓 Certificaciones")
+    st.write("- Cambridge B1 Preliminary")
+    st.write("- Certificado del IB en Artes Visuales (2022)")
 
 st.markdown('<div class="section-divider"></div>', unsafe_allow_html=True)
 
