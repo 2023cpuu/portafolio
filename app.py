@@ -157,52 +157,17 @@ with col1:
     if "img_index" not in st.session_state:
         st.session_state.img_index = 0
 
-    # Estilo para botones de flecha personalizados usando Streamlit
-st.markdown("""
-    <style>
-    div.stButton > button {
-        background-color: #a26dd8;
-        color: white;
-        border: none;
-        font-size: 20px;
-        padding: 10px 16px;
-        border-radius: 50%;
-        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
-        transition: background-color 0.3s ease;
-    }
-    div.stButton > button:hover {
-        background-color: #7a45b2;
-        color: white;
-    }
-    </style>
-""", unsafe_allow_html=True)
+    left_click = st.button("⬅", key="left_arrow", help="Imagen anterior")
+right_click = st.button("➡", key="right_arrow", help="Imagen siguiente")
 
-# Botones y galería en columnas
-col_img1, col_img2, col_img3 = st.columns([1, 6, 1])
+if left_click:
+    st.session_state.img_index = (st.session_state.img_index - 1) % len(imagenes)
+elif right_click:
+    st.session_state.img_index = (st.session_state.img_index + 1) % len(imagenes)
 
-with col_img1:
-    if st.button("⬅️", key="prev_img"):
-        st.session_state.img_index = (st.session_state.img_index - 1) % len(imagenes)
-
-with col_img3:
-    if st.button("➡️", key="next_img"):
-        st.session_state.img_index = (st.session_state.img_index + 1) % len(imagenes)
-
-# Imagen en el centro
 img_actual = imagenes[st.session_state.img_index]
-with col_img2:
-    st.markdown(f"""
-        <div style='text-align: center;'>
-            <img src="{img_actual['url']}" style="max-height:400px; width:auto; border-radius:10px; box-shadow: 0 4px 8px rgba(0,0,0,0.1);" />
-            <p style='color:#5f2c9c; margin-top:10px;'>{img_actual['caption']}</p>
-            <p style='color:gray; font-size:14px;'>Imagen {st.session_state.img_index + 1} de {len(imagenes)}</p>
-        </div>
-    """, unsafe_allow_html=True)
 
-        <p style='color:#5f2c9c; margin-top:10px;'>{img_actual['caption']}</p>
-        <p style='color:gray; font-size:14px;'>Imagen {st.session_state.img_index + 1} de {len(imagenes)}</p>
-    </div>
-""", unsafe_allow_html=True)
+st.image(img_actual["url"], caption=img_actual["caption"], use_column_width=True)
 
 # Columna 2: Explora más sobre Paula
 with col2:
