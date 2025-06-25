@@ -78,20 +78,21 @@ st.markdown("""
 """, unsafe_allow_html=True)
 
 
-# Experiencia laboral
-st.markdown("## Experiencia Laboral")
-st.write("- **Atención al cliente en fast food** (2024-2025)")
-st.write("- **Apoyo administrativo - Oficina de Admisión PUCP** (2025–actualidad)")
+# Experiencia Laboral y Objetivo Profesional en columnas
+col1, col2 = st.columns(2)
 
-st.markdown('<div class="section-divider"></div>', unsafe_allow_html=True)
+with col1:
+    st.markdown("## 🧳 Experiencia Laboral")
+    st.write("- **Atención al cliente en fast food** (2024-2025)")
+    st.write("- **Apoyo administrativo - Oficina de Admisión PUCP** (2025–actualidad)")
 
-# Objetivo profesional
-st.markdown("""
-<div style="background-color:#e6d6ff; padding:20px; border-radius:10px">
-    <h3 style='color:#5f2c9c;'>Objetivo Profesional</h3>
-    <p>Desarrollarse como estratega creativa en la industria publicitaria, integrando su pensamiento analítico, sensibilidad cultural y gusto por la narrativa visual para crear campañas relevantes y auténticas.</p>
-</div>
-""", unsafe_allow_html=True)
+with col2:
+    st.markdown("""
+    <div style="background-color:#e6d6ff; padding:20px; border-radius:10px">
+        <h3 style='color:#5f2c9c;'>🎯 Objetivo Profesional</h3>
+        <p>Desarrollarse como estratega creativa en la industria publicitaria, integrando su pensamiento analítico, sensibilidad cultural y gusto por la narrativa visual para crear campañas relevantes y auténticas.</p>
+    </div>
+    """, unsafe_allow_html=True)
 
 st.markdown('<div class="section-divider"></div>', unsafe_allow_html=True)
 
