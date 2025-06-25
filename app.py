@@ -46,36 +46,21 @@ endorsements = {
 # ---------------------- CONTENIDO ---------------------
 
 # Header
-st.markdown(f"""
-    <div style="
-        background-image: url('{info['Photo']}');
-        background-size: cover;
-        background-position: center;
-        min-height: 100vh;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        position: relative;
-        border-radius: 0 0 15px 15px;
-    ">
-        <div style="
-            background-color: rgba(0, 0, 0, 0.55);
-            padding: 40px;
-            border-radius: 15px;
-            max-width: 800px;
-            text-align: center;
-            color: white;
-        ">
-            <h1 style="margin-bottom: 10px;">{info["Full_Name"]}</h1>
-            <h4 style="margin-top: 0;">{info["Intro"]}</h4>
-            <p style="font-size:16px; line-height:1.6;">
-                📍 {info["City"]}<br>
-                ✉️ {info["Email"]}<br>
-                📞 {info["Phone"]}
-            </p>
-        </div>
+col1, col2 = st.columns([1, 2])
+with col1:
+    st.image(info["Photo"], width=250)
+with col2:
+    st.markdown(f"""
+    <div style="background-color:#f3e9ff; padding:25px; border-radius:15px; text-align:center;">
+        <h1 style="color:#5f2c9c; margin-bottom:0;">{info["Full_Name"]}</h1>
+        <h4 style="color:#7a45b2; margin-top:10px;">{info["Intro"]}</h4>
+        <p style="color:#4d3470; font-size:16px; line-height:1.6;">
+            📍 {info["City"]}<br>
+            ✉️ {info["Email"]}<br>
+            📞 {info["Phone"]}
+        </p>
     </div>
-""", unsafe_allow_html=True)
+    """, unsafe_allow_html=True)
 
 
 st.markdown('<div class="section-divider"></div>', unsafe_allow_html=True)
@@ -138,82 +123,90 @@ with col2:
 
 st.markdown('<div class="section-divider"></div>', unsafe_allow_html=True)
 
-# Galería y Exploración en columnas
-col1, col2 = st.columns([2, 1])  # Puedes ajustar proporciones
+# Galería tipo carrusel con flechas y bucle
+st.markdown("## 📸 Galería de experiencias")
 
-# Columna 1: Galería
+imagenes = [
+    {"url": endorsements["img1"], "caption": "AFICHE PROPIO DEL CORTO LA SILLA ANTE EL BANCO"},
+    {"url": endorsements["img2"], "caption": "TRABAJO EN REDES Y ORIENTACIÓN COMO GUÍA PUCP"},
+    {"url": endorsements["img3"], "caption": "VER Y DESCUBRIR: EVAPORACIÓN ARBÓREA EN MATUCANA"},
+    {"url": endorsements["img4"], "caption": "FOTOGRAFIANDO PASIONES: EL McLAREN DE AYRTON SENNA"},
+    {"url": endorsements["img5"], "caption": "RIELES ESTRECHOS: CRUCE DEL TREN EN MATUCANA"},
+    {"url": endorsements["img6"], "caption": "VIAJAR Y RECORDAR: LA LUNA DESDE BUENOS AIRES"}
+]
+
+# Inicializar índice en session_state
+if "img_index" not in st.session_state:
+    st.session_state.img_index = 0
+
+# Botones de navegación
+col1, col2, col3 = st.columns([1, 6, 1])
 with col1:
-    st.markdown("## 📸 Galería de experiencias")
-    
-    imagenes = [
-        {"url": endorsements["img1"], "caption": "AFICHE PROPIO DEL CORTO LA SILLA ANTE EL BANCO"},
-        {"url": endorsements["img2"], "caption": "TRABAJO EN REDES Y ORIENTACIÓN COMO GUÍA PUCP"},
-        {"url": endorsements["img3"], "caption": "VER Y DESCUBRIR: EVAPORACIÓN ARBÓREA EN MATUCANA"},
-        {"url": endorsements["img4"], "caption": "FOTOGRAFIANDO PASIONES: EL McLAREN DE AYRTON SENNA"},
-        {"url": endorsements["img5"], "caption": "RIELES ESTRECHOS: CRUCE DEL TREN EN MATUCANA"},
-        {"url": endorsements["img6"], "caption": "VIAJAR Y RECORDAR: LA LUNA DESDE BUENOS AIRES"}
-    ]
+    if st.button("⬅️"):
+        st.session_state.img_index = (st.session_state.img_index - 1) % len(imagenes)
+with col3:
+    if st.button("➡️"):
+        st.session_state.img_index = (st.session_state.img_index + 1) % len(imagenes)
 
-    if "img_index" not in st.session_state:
-        st.session_state.img_index = 0
-
-    left_click = st.button("⬅", key="left_arrow", help="Imagen anterior")
-right_click = st.button("➡", key="right_arrow", help="Imagen siguiente")
-
-if left_click:
-    st.session_state.img_index = (st.session_state.img_index - 1) % len(imagenes)
-elif right_click:
-    st.session_state.img_index = (st.session_state.img_index + 1) % len(imagenes)
-
+# Mostrar imagen y leyenda
 img_actual = imagenes[st.session_state.img_index]
+st.markdown(
+    f"""
+    <div style='text-align: center;'>
+        <img src="{img_actual['url']}" style="max-height:400px; width:auto; border-radius:10px; box-shadow: 0 4px 8px rgba(0,0,0,0.1);" />
+        <p style='color:#5f2c9c; margin-top:10px;'>{img_actual['caption']}</p>
+        <p style='color:gray; font-size:14px;'>Imagen {st.session_state.img_index + 1} de {len(imagenes)}</p>
+    </div>
+    """,
+    unsafe_allow_html=True
+)
 
-st.image(img_actual["url"], caption=img_actual["caption"], use_column_width=True)
 
-# Columna 2: Explora más sobre Paula
-with col2:
-    st.markdown("## 🔍 Explora más sobre Paula")
 
-    seccion = st.selectbox(
-        "Selecciona una sección para ver más información:",
-        [
-            "---",
-            "Fortalezas y ventajas",
-            "Desafíos",
-            "Intereses y pasatiempos",
-            "Portafolio",
-            "Disponibilidad",
-            "Referencias"
-        ]
-    )
+st.markdown('<div class="section-divider"></div>', unsafe_allow_html=True)
 
-    if seccion == "Fortalezas y ventajas":
-        st.markdown("### Fortalezas y Ventajas")
-        st.write("Empática, observadora y versátil, Paula se adapta con facilidad a contextos dinámicos. Su curiosidad constante y dedicación le permiten aportar una mirada fresca y comprometida a los proyectos.")
+# ---------------------- BUSCADOR INTERACTIVO ---------------------
 
-    elif seccion == "Desafíos":
-        st.markdown("### Desafíos")
-        st.write("Su nivel de detalle puede ralentizar algunos procesos, pero garantiza resultados cuidados y coherentes con los objetivos del proyecto.")
+st.markdown("## 🔍 Explora más sobre Paula")
 
-    elif seccion == "Intereses y pasatiempos":
-        st.markdown("### Intereses y Pasatiempos")
-        st.write("Apasionada por la fotografía, Paula disfruta documentar escenas cotidianas, explorar rincones urbanos, ver cine independiente y compartir conversaciones largas con café de por medio. También le interesa contar historias visuales en redes sociales.")
+seccion = st.selectbox(
+    "Selecciona una sección para ver más información:",
+    [
+        "---",
+        "Fortalezas y ventajas",
+        "Desafíos",
+        "Intereses y pasatiempos",
+        "Portafolio",
+        "Disponibilidad",
+        "Referencias"
+    ]
+)
 
-    elif seccion == "Portafolio":
-        st.markdown("### Portafolio")
-        st.write("Actualmente se encuentra desarrollando un portafolio digital que reúna sus trabajos en fotografía, producción de eventos y conceptos creativos. Su objetivo es mostrar su enfoque multidisciplinario y su estilo personal.")
+if seccion == "Fortalezas y ventajas":
+    st.markdown("### Fortalezas y Ventajas")
+    st.write("Empática, observadora y versátil, Paula se adapta con facilidad a contextos dinámicos. Su curiosidad constante y dedicación le permiten aportar una mirada fresca y comprometida a los proyectos.")
 
-    elif seccion == "Disponibilidad":
-        st.markdown("### Disponibilidad")
-        st.write("Abierta a prácticas, proyectos freelance o roles de asistencia en publicidad, eventos y creación de contenido.")
+elif seccion == "Desafíos":
+    st.markdown("### Desafíos")
+    st.write("Su nivel de detalle puede ralentizar algunos procesos, pero garantiza resultados cuidados y coherentes con los objetivos del proyecto.")
 
-    elif seccion == "Referencias":
-        st.markdown("### Referencias")
-        st.write("Disponibles a solicitud.")
+elif seccion == "Intereses y pasatiempos":
+    st.markdown("### Intereses y Pasatiempos")
+    st.write("Apasionada por la fotografía, Paula disfruta documentar escenas cotidianas, explorar rincones urbanos, ver cine independiente y compartir conversaciones largas con café de por medio. También le interesa contar historias visuales en redes sociales.")
 
+elif seccion == "Portafolio":
+    st.markdown("### Portafolio")
+    st.write("Actualmente se encuentra desarrollando un portafolio digital que reúna sus trabajos en fotografía, producción de eventos y conceptos creativos. Su objetivo es mostrar su enfoque multidisciplinario y su estilo personal.")
+
+elif seccion == "Disponibilidad":
+    st.markdown("### Disponibilidad")
+    st.write("Abierta a prácticas, proyectos freelance o roles de asistencia en publicidad, eventos y creación de contenido.")
+
+elif seccion == "Referencias":
+    st.markdown("### Referencias")
+    st.write("Disponibles a solicitud.")
 
 
 # Footer
 st.markdown('<div class="section-divider"></div>', unsafe_allow_html=True)
 st.markdown("Creado por Paula Jimena Chirinos Molina usando Streamlit.")
-
-
