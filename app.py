@@ -51,16 +51,20 @@ st.markdown(f"""
         background-image: url('{info['Photo']}');
         background-size: cover;
         background-position: center;
-        padding: 60px;
-        border-radius: 15px;
-        color: white;
-        text-align: center;
+        min-height: 100vh;
+        display: flex;
+        align-items: center;
+        justify-content: center;
         position: relative;
+        border-radius: 0 0 15px 15px;
     ">
         <div style="
-            background-color: rgba(0, 0, 0, 0.5);
+            background-color: rgba(0, 0, 0, 0.55);
             padding: 40px;
             border-radius: 15px;
+            max-width: 800px;
+            text-align: center;
+            color: white;
         ">
             <h1 style="margin-bottom: 10px;">{info["Full_Name"]}</h1>
             <h4 style="margin-top: 0;">{info["Intro"]}</h4>
@@ -72,7 +76,6 @@ st.markdown(f"""
         </div>
     </div>
 """, unsafe_allow_html=True)
-
 
 
 st.markdown('<div class="section-divider"></div>', unsafe_allow_html=True)
