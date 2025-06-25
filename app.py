@@ -60,6 +60,7 @@ st.markdown(f"""
     ">
         <div style="
             background-color: rgba(0, 0, 0, 0.55);
+            background-attachment: fixed;
             padding: 40px;
             border-radius: 15px;
             max-width: 800px;
