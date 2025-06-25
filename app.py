@@ -246,3 +246,36 @@ st.markdown("""
         📧 a20230941@pucp.edu.pe | 📞 999003581
     </div>
 """, unsafe_allow_html=True)
+
+st.markdown("""
+<style>
+/* Botón flotante tipo bolita */
+.floating-email-btn {
+    position: fixed;
+    bottom: 40px;
+    right: 40px;
+    background-color: #a26dd8;  /* morado */
+    color: white;
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+    text-align: center;
+    font-size: 30px;
+    box-shadow: 2px 2px 5px rgba(0,0,0,0.3);
+    cursor: pointer;
+    z-index: 9999;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: background-color 0.3s ease;
+}
+
+.floating-email-btn:hover {
+    background-color: #7a45b2;
+}
+</style>
+
+<a href="mailto:a20230941@pucp.edu.pe" class="floating-email-btn" title="Escríbeme un correo">
+    ✉️
+</a>
+""", unsafe_allow_html=True)
