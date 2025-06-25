@@ -46,21 +46,33 @@ endorsements = {
 # ---------------------- CONTENIDO ---------------------
 
 # Header
-col1, col2 = st.columns([1, 2])
-with col1:
-    st.image(info["Photo"], width=250)
-with col2:
-    st.markdown(f"""
-    <div style="background-color:#f3e9ff; padding:25px; border-radius:15px; text-align:center;">
-        <h1 style="color:#5f2c9c; margin-bottom:0;">{info["Full_Name"]}</h1>
-        <h4 style="color:#7a45b2; margin-top:10px;">{info["Intro"]}</h4>
-        <p style="color:#4d3470; font-size:16px; line-height:1.6;">
-            📍 {info["City"]}<br>
-            ✉️ {info["Email"]}<br>
-            📞 {info["Phone"]}
-        </p>
+st.markdown(f"""
+    <div style="
+        background-image: url('{info['Photo']}');
+        background-size: cover;
+        background-position: center;
+        padding: 60px;
+        border-radius: 15px;
+        color: white;
+        text-align: center;
+        position: relative;
+    ">
+        <div style="
+            background-color: rgba(0, 0, 0, 0.5);
+            padding: 40px;
+            border-radius: 15px;
+        ">
+            <h1 style="margin-bottom: 10px;">{info["Full_Name"]}</h1>
+            <h4 style="margin-top: 0;">{info["Intro"]}</h4>
+            <p style="font-size:16px; line-height:1.6;">
+                📍 {info["City"]}<br>
+                ✉️ {info["Email"]}<br>
+                📞 {info["Phone"]}
+            </p>
+        </div>
     </div>
-    """, unsafe_allow_html=True)
+""", unsafe_allow_html=True)
+
 
 
 st.markdown('<div class="section-divider"></div>', unsafe_allow_html=True)
