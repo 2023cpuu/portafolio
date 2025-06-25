@@ -249,11 +249,29 @@ st.markdown("""
 
 st.markdown("""
 <style>
+/* Contenedor del texto y el botón */
+.floating-email-container {
+    position: fixed;
+    bottom: 110px;  /* espacio para que el texto quede arriba del botón */
+    right: 40px;
+    z-index: 9999;
+    text-align: center;
+    font-family: Arial, sans-serif;
+}
+
+/* Texto encima del botón */
+.floating-email-text {
+    background-color: #a26dd8;
+    color: white;
+    padding: 6px 12px;
+    border-radius: 15px;
+    margin-bottom: 8px;
+    font-size: 14px;
+    box-shadow: 2px 2px 5px rgba(0,0,0,0.3);
+}
+
 /* Botón flotante tipo bolita */
 .floating-email-btn {
-    position: fixed;
-    bottom: 40px;
-    right: 40px;
     background-color: #a26dd8;  /* morado */
     color: white;
     width: 60px;
@@ -263,11 +281,11 @@ st.markdown("""
     font-size: 30px;
     box-shadow: 2px 2px 5px rgba(0,0,0,0.3);
     cursor: pointer;
-    z-index: 9999;
     display: flex;
     align-items: center;
     justify-content: center;
     transition: background-color 0.3s ease;
+    margin: 0 auto;
 }
 
 .floating-email-btn:hover {
@@ -275,7 +293,11 @@ st.markdown("""
 }
 </style>
 
-<a href="mailto:a20230941@pucp.edu.pe" class="floating-email-btn" title="Escríbeme un correo">
-    ✉️
-</a>
+<div class="floating-email-container">
+    <div class="floating-email-text">¿Consultas adicionales?</div>
+    <a href="mailto:a20230941@pucp.edu.pe" class="floating-email-btn" title="Escríbeme un correo">
+        ✉️
+    </a>
+</div>
 """, unsafe_allow_html=True)
+
